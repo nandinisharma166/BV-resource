@@ -1,0 +1,15 @@
+com\example\demo\entity\UploadedResource.class
+com\example\demo\entity\ResourceMate.class
+com\example\demo\entity\Student.class
+MongoConfig.class
+com\example\demo\controller\ResourceMateController.class
+com\example\demo\entity\PdfDetails.class
+com\example\demo\repository\UploadedResourceRepository.class
+com\example\demo\BVresource.class
+com\example\demo\controller\StudentController.class
+com\example\demo\config\SwaggerConfig.class
+com\example\demo\repository\PdfDetailsRepository.class
+com\example\demo\controller\ResourceUploadController.class
+com\example\demo\repository\StudentRepository.class
+com\example\demo\controller\PdfDetailsController.class
+com\example\demo\repository\ResourceMateRepository.class
