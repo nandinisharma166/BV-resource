@@ -43,18 +43,47 @@ public class PdfDetailsController {
         return ResponseEntity.ok(pdfList);
     }
 
+//    @GetMapping("/download")
+//    public ResponseEntity<Resource> downloadPdf(@RequestParam String fileName, @RequestParam String collegeId) throws IOException {
+//        // Adjust the path if your files are stored differently on Render
+//        Path filePath = Paths.get(new ClassPathResource("static/" + fileName).getURI());
+//        if (!Files.exists(filePath)) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        long fileSize = Files.size(filePath);
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
+//        String formattedDate = LocalDateTime.now().format(formatter);
+//
+//
+//        PdfDetails pdfDetails = new PdfDetails();
+//        pdfDetails.setPdfName(fileName);
+//        pdfDetails.setPdfUrl("https://bv-resource.onrender.com/" + fileName);
+//        pdfDetails.setFileSize(fileSize);
+//        pdfDetails.setMetadata("Downloaded by: " + collegeId);
+//        pdfDetails.setDownloadTime(formattedDate);
+//        pdfRepository.save(pdfDetails);
+//
+//        Resource resource = new UrlResource(filePath.toUri());
+//        return ResponseEntity.ok()
+//                .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
+//                .contentType(MediaType.APPLICATION_PDF)
+//                .body(resource);
+//    }
+
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadPdf(@RequestParam String fileName, @RequestParam String collegeId) throws IOException {
-        // Adjust the path if your files are stored differently on Render
-        Path filePath = Paths.get(new ClassPathResource("static/" + fileName).getURI());
-        if (!Files.exists(filePath)) {
+        ClassPathResource resource = new ClassPathResource("static/" + fileName);
+
+        if (!resource.exists()) {
             return ResponseEntity.notFound().build();
         }
+
+        Path filePath = resource.getFile().toPath(); // Only if you need file size
 
         long fileSize = Files.size(filePath);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
         String formattedDate = LocalDateTime.now().format(formatter);
-
 
         PdfDetails pdfDetails = new PdfDetails();
         pdfDetails.setPdfName(fileName);
@@ -62,9 +91,9 @@ public class PdfDetailsController {
         pdfDetails.setFileSize(fileSize);
         pdfDetails.setMetadata("Downloaded by: " + collegeId);
         pdfDetails.setDownloadTime(formattedDate);
+
         pdfRepository.save(pdfDetails);
 
-        Resource resource = new UrlResource(filePath.toUri());
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + fileName + "\"")
                 .contentType(MediaType.APPLICATION_PDF)
