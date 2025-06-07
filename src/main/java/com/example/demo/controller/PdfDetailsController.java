@@ -29,10 +29,12 @@ public class PdfDetailsController {
     // Endpoint to log PDF download details into the database
     @PostMapping("/logDownload")
     public ResponseEntity<String> logPdfDownload(@RequestBody PdfDetails pdfDetails) {
-        pdfDetails.setDownloadTime(LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy, hh:mm a");
+        pdfDetails.setDownloadTime(LocalDateTime.now().format(formatter));
         pdfRepository.save(pdfDetails);
         return ResponseEntity.ok("Download logged successfully");
     }
+
 
     @GetMapping("/getAll")
     public ResponseEntity<List<PdfDetails>> getAllPdfDetails() {
