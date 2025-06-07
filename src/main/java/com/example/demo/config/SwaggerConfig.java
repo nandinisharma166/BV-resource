@@ -13,8 +13,11 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Demo Project API")
+                        .title("BV-resource Demo")
                         .version("1.0")
-                        .description("Spring Boot + MongoDB Demo API"));
+                        .description("This API allows students to upload, access, " +
+                                "and manage academic resources such as PDF notes, previous year papers, " +
+                                "and study material. Developed using Spring Boot and deployed on Render," +
+                                " it provides full Swagger documentation for testing and integration."));
     }
 }

@@ -54,6 +54,7 @@ public class PdfDetailsController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy, hh:mm a");
         String formattedDate = LocalDateTime.now().format(formatter);
 
+
         PdfDetails pdfDetails = new PdfDetails();
         pdfDetails.setPdfName(fileName);
         pdfDetails.setPdfUrl("https://bv-resource.onrender.com/" + fileName);
