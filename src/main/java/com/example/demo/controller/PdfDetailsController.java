@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.PdfDetails;
 import com.example.demo.repository.PdfDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
@@ -45,7 +46,7 @@ public class PdfDetailsController {
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadPdf(@RequestParam String fileName, @RequestParam String collegeId) throws IOException {
         // Adjust the path if your files are stored differently on Render
-        Path filePath = Paths.get("src/main/resources/static", fileName);
+        Path filePath = Paths.get(new ClassPathResource("static/" + fileName).getURI());
         if (!Files.exists(filePath)) {
             return ResponseEntity.notFound().build();
         }
