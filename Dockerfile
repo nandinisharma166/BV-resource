@@ -1,5 +1,5 @@
 # Stage 1: Build the jar
-FROM maven:3.8.6-openjdk-17 AS build
+FROM maven:3.8.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy only pom.xml first to leverage Docker layer caching
